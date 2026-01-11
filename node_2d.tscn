@@ -1,0 +1,249 @@
+[gd_scene load_steps=31 format=3 uid="uid://bbdot2wc4y1yk"]
+
+[ext_resource type="Script" uid="uid://dr0f5ur675stm" path="res://character_body_2d.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://cqnp1wptgmldb" path="res://icon.svg" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://b1enh1nkb5ym8" path="res://camera_2d.gd" id="2_epypp"]
+[ext_resource type="Script" uid="uid://dufpvneu225od" path="res://softcollider.gd" id="3_ir8iy"]
+[ext_resource type="Script" uid="uid://d2jtaj2k4dhcl" path="res://tt.gd" id="4_d21ai"]
+[ext_resource type="Script" uid="uid://chi0nmd7w6s14" path="res://pickup_area.gd" id="4_nr8wp"]
+[ext_resource type="Shader" uid="uid://drs440hqu3atv" path="res://node_2d.gdshader" id="4_q6r6c"]
+[ext_resource type="Shader" uid="uid://t74fdgikc6ci" path="res://vignette.gdshader" id="5_kdubu"]
+[ext_resource type="Script" uid="uid://bd1i65ax52tg0" path="res://hungerbar.gd" id="6_rj586"]
+[ext_resource type="Script" uid="uid://esls8kbjy57y" path="res://tooltip.gd" id="7_rj586"]
+[ext_resource type="Shader" uid="uid://c4dx52u2c1mxo" path="res://tooltip.gdshader" id="8_4d7sh"]
+[ext_resource type="Shader" uid="uid://did4e6iydut5d" path="res://item.gdshader" id="11_hqns4"]
+[ext_resource type="Script" uid="uid://j8d0knd782nm" path="res://item.gd" id="11_x0ka3"]
+[ext_resource type="Script" uid="uid://b5a1f27ng58h" path="res://item_resource.gd" id="12_0h7mo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0e48y"]
+radius = 21.213203
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+size = Vector2(69, 95.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqns4"]
+radius = 21.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x0ka3"]
+radius = 85.00588
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir8iy"]
+shader = ExtResource("8_4d7sh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_d21ai"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d21ai"]
+shader = ExtResource("4_q6r6c")
+shader_parameter/current_value = 0.3790000180025
+shader_parameter/lerp_value = 0.506000024035
+shader_parameter/front_color = Color(0.42, 0.20831999, 0.11759999, 1)
+shader_parameter/back_color = Color(0.21, 0.11242, 0.0378, 1)
+shader_parameter/bg_color = Color(0.3, 0.28800002, 0.28800002, 1)
+shader_parameter/border_color = Color(0, 0, 0, 1)
+shader_parameter/border_px = 1.0
+
+[sub_resource type="Curve" id="Curve_rj586"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6630435, 0), 0.0, 0.0, 0, 0, Vector2(0.90760875, 0.26966298), 2.7565541, 2.7565541, 0, 0, Vector2(1, 0.7415731), 4.419992, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj586"]
+shader = ExtResource("5_kdubu")
+shader_parameter/outerRadius = 5.0
+shader_parameter/MainAlpha = 1.0
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nr8wp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ir8iy"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2bti"]
+radius = 64.070274
+
+[sub_resource type="Resource" id="Resource_nr8wp"]
+script = ExtResource("12_0h7mo")
+name = "Log"
+sprite = ExtResource("2_0e48y")
+weight = 1.0
+lore = "Wood is a structural tissue/material found as xylem in the stems and roots of trees and other woody plants."
+metadata/_custom_type_script = "uid://b5a1f27ng58h"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0ka3"]
+shader = ExtResource("11_hqns4")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 0.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nr8wp"]
+radius = 16.03122
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0h7mo"]
+radius = 16.03122
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_0e48y")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(40.5, 0.125)
+shape = SubResource("RectangleShape2D_wtcfe")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+script = ExtResource("2_epypp")
+
+[node name="softcollider" type="Area2D" parent="Player" groups=["soft"]]
+script = ExtResource("3_ir8iy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/softcollider"]
+shape = SubResource("CircleShape2D_hqns4")
+
+[node name="PickupArea" type="Area2D" parent="Player"]
+script = ExtResource("4_nr8wp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupArea"]
+shape = SubResource("CircleShape2D_x0ka3")
+debug_color = Color(0, 11.618606, 13.50434, 0.105882354)
+
+[node name="Tooltip" type="Label" parent="."]
+visible = false
+z_index = 100
+material = SubResource("ShaderMaterial_ir8iy")
+offset_right = 172.0
+offset_bottom = 127.0
+mouse_filter = 1
+text = "test"
+label_settings = SubResource("LabelSettings_d21ai")
+autowrap_mode = 3
+script = ExtResource("7_rj586")
+
+[node name="Panel" type="Panel" parent="Tooltip"]
+z_index = -1
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 128.0
+mouse_filter = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HungerBar" type="ColorRect" parent="UI"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d21ai")
+offset_left = 1091.0
+offset_top = 635.0
+offset_right = 1460.0
+offset_bottom = 684.0
+rotation = -1.5707964
+mouse_filter = 1
+script = ExtResource("6_rj586")
+vignette_curve = SubResource("Curve_rj586")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="Postprocessing" type="ColorRect" parent="UI/CanvasLayer"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_rj586")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 1
+
+[node name="ActionLabel" type="Label" parent="UI"]
+offset_left = 6.0
+offset_top = 426.0
+offset_right = 1151.0
+offset_bottom = 503.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+text = "action text"
+label_settings = SubResource("LabelSettings_nr8wp")
+horizontal_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(165, -106)
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, -7.6293945e-06)
+scale = Vector2(0.765625, 0.765625)
+texture = ExtResource("2_0e48y")
+
+[node name="TooltipHandler" type="Area2D" parent="StaticBody2D"]
+position = Vector2(150, 96)
+script = ExtResource("4_d21ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/TooltipHandler"]
+position = Vector2(-150, -96)
+shape = SubResource("CircleShape2D_ir8iy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_ir8iy")
+
+[node name="softcollider" type="Area2D" parent="StaticBody2D" groups=["soft"]]
+script = ExtResource("3_ir8iy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/softcollider"]
+shape = SubResource("CircleShape2D_d2bti")
+
+[node name="item" type="CharacterBody2D" parent="."]
+position = Vector2(-112, 0)
+script = ExtResource("11_x0ka3")
+info = SubResource("Resource_nr8wp")
+
+[node name="Icon" type="Sprite2D" parent="item"]
+material = SubResource("ShaderMaterial_x0ka3")
+position = Vector2(-2.3841858e-06, 9.536743e-07)
+scale = Vector2(0.2148437, 0.2148437)
+texture = ExtResource("2_0e48y")
+
+[node name="softcollider" type="Area2D" parent="item" groups=["item", "soft"]]
+script = ExtResource("3_ir8iy")
+push_strength = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item/softcollider"]
+shape = SubResource("CircleShape2D_nr8wp")
+
+[node name="TooltipHandler" type="Area2D" parent="item"]
+position = Vector2(150, 96)
+script = ExtResource("4_d21ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item/TooltipHandler"]
+position = Vector2(-150, -96)
+shape = SubResource("CircleShape2D_0h7mo")
+
+[node name="item2" type="CharacterBody2D" parent="."]
+position = Vector2(-187, 12)
+script = ExtResource("11_x0ka3")
+info = SubResource("Resource_nr8wp")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="item2"]
+material = SubResource("ShaderMaterial_x0ka3")
+position = Vector2(-2.3841858e-06, 9.536743e-07)
+scale = Vector2(0.2148437, 0.2148437)
+texture = ExtResource("2_0e48y")
+
+[node name="softcollider" type="Area2D" parent="item2" groups=["item", "soft"]]
+script = ExtResource("3_ir8iy")
+push_strength = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item2/softcollider"]
+shape = SubResource("CircleShape2D_nr8wp")
+
+[node name="TooltipHandler" type="Area2D" parent="item2"]
+position = Vector2(150, 96)
+script = ExtResource("4_d21ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item2/TooltipHandler"]
+position = Vector2(-150, -96)
+shape = SubResource("CircleShape2D_0h7mo")
+
+[connection signal="area_entered" from="Player/PickupArea" to="Player/PickupArea" method="_on_area_entered"]
+[connection signal="area_exited" from="Player/PickupArea" to="Player/PickupArea" method="_on_area_exited"]
+[connection signal="area_entered" from="item/softcollider" to="item" method="_on_softcollider_area_entered"]
+[connection signal="area_entered" from="item2/softcollider" to="item2" method="_on_softcollider_area_entered"]
