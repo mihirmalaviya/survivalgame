@@ -39,19 +39,7 @@ func _physics_process(delta):
 	look_at(get_global_mouse_position())
 	move_and_slide()
 
-#func _on_hunger_bar_hunger_0() -> void:
-	#postprocessing.material.set_shader_parameter("outerRadius")
-	#postprocessing.material.set_shader_parameter("MainAlpha")
-	##pass # Replace with function body.
-#
-#func _on_hunger_bar_hunger_1() -> void:
-	#pass # Replace with function body.
-#
-#func _on_hunger_bar_hunger_2() -> void:
-	#pass # Replace with function body.
-#
-#func _on_hunger_bar_hunger_3() -> void:
-	#pass # Replace with function body.
-#
-#func _on_hunger_bar_hunger_5() -> void:
-	#pass # Replace with function body.
+#func _input(event):
+	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#for body in $Area2D.get_overlapping_bodies():
+			#body.damage()
